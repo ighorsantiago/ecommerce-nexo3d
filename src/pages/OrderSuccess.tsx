@@ -20,7 +20,7 @@ export function OrderSuccess() {
                 <p style={{ color: theme.textSecondary }}>💳 Pagamento: MB WAY, Multibanco ou transferência</p>
             </div>
             <Link
-                to="/"
+                to="/catalogo"
                 className="px-8 py-3.5 rounded-xl font-bold text-sm text-white"
                 style={{ backgroundColor: theme.primary }}
             >
