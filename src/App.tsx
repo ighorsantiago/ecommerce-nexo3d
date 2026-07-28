@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { CartContext } from './hooks/useCartContext'
 import { useCart } from './hooks/useCart'
+import { ProductsProvider } from './contexts/ProductsContext'
 import { Header } from './components/base/Header'
 import { Footer } from './components/base/Footer'
 import { WhatsAppButton } from './components/base/WhatsAppButton'
@@ -20,6 +21,7 @@ export default function App() {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
+        <ProductsProvider>
         <CartContext.Provider value={{ ...cart, isOpen, openCart: () => setIsOpen(true), closeCart: () => setIsOpen(false) }}>
             <BrowserRouter>
                 <Header />
@@ -40,5 +42,6 @@ export default function App() {
                 <WhatsAppButton />
             </BrowserRouter>
         </CartContext.Provider>
+        </ProductsProvider>
     )
 }

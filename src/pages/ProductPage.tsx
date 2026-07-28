@@ -1,16 +1,46 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ShoppingCart, Clock, ChevronLeft, Check, Wifi } from 'lucide-react'
 import { theme } from '../themes'
-import { products, config } from '../config'
+import { config } from '../config'
+import { useProducts } from '../contexts/ProductsContext'
 import { useCartContext } from '../hooks/useCartContext'
 
 export function ProductPage() {
     const { slug } = useParams<{ slug: string }>()
     const navigate = useNavigate()
     const { addItem, openCart } = useCartContext()
+    const products = useProducts()
 
     const product = products.find(p => p.slug === slug)
+
+    useEffect(() => {
+        if (!product) return
+        document.title = `${product.name} · Nexo3D`
+        const script = document.createElement('script')
+        script.type = 'application/ld+json'
+        script.text = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: product.name,
+            description: product.description,
+            image: product.images[0],
+            offers: {
+                '@type': 'Offer',
+                price: product.price.toFixed(2),
+                priceCurrency: 'EUR',
+                availability: product.inStock
+                    ? 'https://schema.org/InStock'
+                    : 'https://schema.org/OutOfStock',
+                seller: { '@type': 'Organization', name: 'Nexo3D' },
+            },
+        })
+        document.head.appendChild(script)
+        return () => {
+            document.title = 'Nexo3D — Impressão 3D Personalizada'
+            document.head.removeChild(script)
+        }
+    }, [product])
 
     const [selectedImage, setSelectedImage] = useState(0)
     const [selectedColor, setSelectedColor] = useState(product?.colors[0] ?? '')

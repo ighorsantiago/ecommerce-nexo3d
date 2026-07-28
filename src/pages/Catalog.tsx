@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { theme } from '../themes'
-import { products } from '../config'
+import { useProducts } from '../contexts/ProductsContext'
 import { ProductCard } from '../components/catalog/ProductCard'
 import type { ProductCategory } from '../types'
 
@@ -16,6 +16,7 @@ const categories: { value: ProductCategory | 'todos'; label: string }[] = [
 ]
 
 export function Catalog() {
+    const products = useProducts()
     const [searchParams] = useSearchParams()
     const initialCat = (searchParams.get('categoria') as ProductCategory) ?? 'todos'
     const [selected, setSelected] = useState<ProductCategory | 'todos'>(initialCat)

@@ -7,7 +7,7 @@ export const config = {
         name: 'Nexo3D',
         tagline: 'Impressão 3D Personalizada',
         description: 'Transformamos a sua ideia em produto real.',
-        whatsapp: '351910000000',      // substituir pelo número real
+        whatsapp: '+351931735975',      // substituir pelo número real
         email: 'info@nexo3d.pt',
         instagram: 'nexo3d.pt',
         address: 'Portugal',

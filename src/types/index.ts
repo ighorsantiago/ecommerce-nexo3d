@@ -35,6 +35,32 @@ export interface Product {
     inStock: boolean
 }
 
+export type CustomOrderStatus =
+    | 'em_contacto'
+    | 'orcamento_enviado'
+    | 'confirmado'
+    | 'em_producao'
+    | 'enviado'
+    | 'entregue'
+    | 'cancelado'
+
+export interface CustomOrder {
+    id: string
+    client: string
+    phone: string
+    description: string
+    price: number | null
+    status: CustomOrderStatus
+    notes: string
+    createdAt: string
+    updatedAt: string
+}
+
+export type ProductOverride = Partial<Pick<Product,
+    | 'name' | 'price' | 'shortDesc' | 'description'
+    | 'images' | 'badge' | 'badgeColor' | 'inStock' | 'featured'
+>>
+
 export interface CartItem {
     product: Product
     quantity: number

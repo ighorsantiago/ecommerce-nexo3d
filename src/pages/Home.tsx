@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
 import { Zap, Package, Heart, Wifi } from 'lucide-react'
 import { theme } from '../themes'
-import { products } from '../config'
+import { config } from '../config'
+import { useProducts } from '../contexts/ProductsContext'
 import { ProductCard } from '../components/catalog/ProductCard'
-
-const featured = products.filter(p => p.featured)
 
 const features = [
     { icon: Package, title: 'Produção sob encomenda', desc: 'Cada peça é fabricada especialmente para si, com prazo de 3 a 7 dias úteis.' },
@@ -14,6 +13,9 @@ const features = [
 ]
 
 export function Home() {
+    const products = useProducts()
+    const featured = products.filter(p => p.featured)
+
     return (
         <div>
             {/* Hero */}
@@ -48,7 +50,7 @@ export function Home() {
                         Ver produtos
                     </Link>
                     <a
-                        href="https://wa.me/351910000000?text=Olá!%20Quero%20saber%20mais%20sobre%20os%20vossos%20produtos."
+                        href={`https://wa.me/${config.brand.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Olá! Quero saber mais sobre os vossos produtos.')}`}
                         target="_blank"
                         rel="noreferrer"
                         className="px-8 py-4 rounded-xl font-bold text-sm transition-all border"
