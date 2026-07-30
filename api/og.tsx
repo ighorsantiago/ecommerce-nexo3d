@@ -1,9 +1,8 @@
 import { ImageResponse } from '@vercel/og'
+import type { IncomingMessage, ServerResponse } from 'node:http'
 
-export const config = { runtime: 'edge' }
-
-export default function handler() {
-    return new ImageResponse(
+export default async function handler(_req: IncomingMessage, res: ServerResponse) {
+    const image = new ImageResponse(
         <div
             style={{
                 display: 'flex',
@@ -99,4 +98,9 @@ export default function handler() {
         </div>,
         { width: 1200, height: 630 },
     )
+
+    const buffer = await image.arrayBuffer()
+    res.setHeader('Content-Type', 'image/png')
+    res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800')
+    res.end(Buffer.from(buffer))
 }
