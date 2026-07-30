@@ -83,3 +83,43 @@ export interface OrderForm {
     nif?: string
     notes?: string
 }
+
+export type OrderStatus =
+    | 'novo'
+    | 'confirmado'
+    | 'em_producao'
+    | 'enviado'
+    | 'concluido'
+    | 'cancelado'
+
+export interface OrderItem {
+    product_id: string
+    product_name: string
+    price: number
+    quantity: number
+    selected_color: string
+    custom_values: Record<string, string>
+}
+
+export interface Order {
+    id: string
+    customer_name: string
+    customer_email: string
+    customer_phone: string
+    address: string
+    city: string
+    postal_code: string
+    country: string
+    nif: string | null
+    notes: string | null
+    items: OrderItem[]
+    subtotal: number
+    shipping_cost: number
+    shipping_method: string
+    total: number
+    status: OrderStatus
+    payment_method: string | null
+    payment_ref: string | null
+    created_at: string
+    updated_at: string
+}

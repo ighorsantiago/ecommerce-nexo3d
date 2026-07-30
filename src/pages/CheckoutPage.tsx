@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { ShoppingBag } from 'lucide-react'
+import { ShoppingBag, Loader2 } from 'lucide-react'
 import { theme } from '../themes'
 import { useCartContext } from '../hooks/useCartContext'
 import { config } from '../config'
+import { createOrder, cartItemsToOrderItems } from '../lib/orders'
 import type { OrderForm } from '../types'
 
 const SHIPPING = config.shipping.rates
@@ -37,6 +38,8 @@ export function CheckoutPage() {
     const navigate = useNavigate()
     const { items, subtotal, clearCart } = useCartContext()
     const [selectedShipping, setSelectedShipping] = useState(0)
+    const [submitting, setSubmitting] = useState(false)
+    const [submitError, setSubmitError] = useState(false)
     const [form, setForm] = useState<OrderForm>({
         name: '', phone: '', email: '',
         address: '', city: '', postalCode: '', country: 'Portugal', nif: '', notes: '',
@@ -61,12 +64,28 @@ export function CheckoutPage() {
         setForm(prev => ({ ...prev, [field]: value }))
     }
 
-    function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        const msg = buildWhatsAppMessage(form, items, subtotal, shippingCost)
-        clearCart()
-        navigate('/pedido-confirmado')
-        window.open(`https://wa.me/${config.brand.whatsapp}?text=${msg}`, '_blank')
+        setSubmitting(true)
+        setSubmitError(false)
+        try {
+            const order = await createOrder({
+                form,
+                items: cartItemsToOrderItems(items),
+                subtotal,
+                shippingCost,
+                shippingMethod: SHIPPING[selectedShipping].label,
+                total,
+            })
+            const msg = buildWhatsAppMessage(form, items, subtotal, shippingCost)
+            clearCart()
+            navigate(`/pedido-confirmado?id=${order.id.slice(0, 8).toUpperCase()}`)
+            window.open(`https://wa.me/${config.brand.whatsapp}?text=${msg}`, '_blank')
+        } catch {
+            setSubmitError(true)
+        } finally {
+            setSubmitting(false)
+        }
     }
 
     const inputStyle = {
@@ -180,17 +199,26 @@ export function CheckoutPage() {
                                     <span style={{ color: theme.primary }}>{total.toFixed(2)}€</span>
                                 </div>
                             </div>
+                            {submitError && (
+                                <p className="text-xs text-center font-medium" style={{ color: theme.danger }}>
+                                    Erro ao registar pedido. Verifique a ligação e tente novamente.
+                                </p>
+                            )}
                             <button
                                 type="submit"
-                                className="w-full py-4 rounded-xl font-bold text-sm text-white cursor-pointer transition-all"
+                                disabled={submitting}
+                                className="w-full py-4 rounded-xl font-bold text-sm text-white cursor-pointer transition-all flex items-center justify-center gap-2 disabled:opacity-60"
                                 style={{ backgroundColor: theme.primary }}
-                                onMouseEnter={e => (e.currentTarget.style.backgroundColor = theme.primaryHover)}
+                                onMouseEnter={e => !submitting && (e.currentTarget.style.backgroundColor = theme.primaryHover)}
                                 onMouseLeave={e => (e.currentTarget.style.backgroundColor = theme.primary)}
                             >
-                                Confirmar via WhatsApp →
+                                {submitting
+                                    ? <><Loader2 size={16} className="animate-spin" /> A registar pedido…</>
+                                    : 'Confirmar via WhatsApp →'
+                                }
                             </button>
                             <p className="text-xs text-center" style={{ color: theme.textMuted }}>
-                                O pedido é enviado para o WhatsApp. Confirmamos e combinamos o pagamento por MB WAY, Multibanco ou transferência.
+                                O pedido é guardado e enviado para o WhatsApp. Confirmamos e combinamos o pagamento em breve.
                             </p>
                         </div>
                     </div>

@@ -1,15 +1,23 @@
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { CheckCircle } from 'lucide-react'
 import { theme } from '../themes'
 
 export function OrderSuccess() {
+    const [params] = useSearchParams()
+    const orderId = params.get('id')
+
     return (
         <div className="max-w-md mx-auto px-4 py-24 flex flex-col items-center gap-5 text-center">
             <CheckCircle size={56} style={{ color: theme.success }} />
             <div>
                 <h1 className="text-2xl font-extrabold" style={{ color: theme.textPrimary }}>
-                    Encomenda enviada! 🎉
+                    Encomenda registada! 🎉
                 </h1>
+                {orderId && (
+                    <p className="mt-2 text-xs font-mono font-bold tracking-widest" style={{ color: theme.muted }}>
+                        Nº {orderId}
+                    </p>
+                )}
                 <p className="mt-2 text-sm leading-relaxed" style={{ color: theme.textSecondary }}>
                     O resumo foi enviado para o nosso WhatsApp. Iremos confirmar o pedido e combinar o pagamento em breve.
                 </p>

@@ -1,14 +1,16 @@
 import { useState } from 'react'
-import { Lock, Cpu, Package, Sparkles, Building2, LogOut } from 'lucide-react'
+import { Lock, Cpu, Package, Sparkles, Building2, LogOut, ShoppingBag } from 'lucide-react'
 import { theme } from '../themes'
 import { config } from '../config'
 import { AdminProducts } from '../components/admin/AdminProducts'
 import { AdminCustomOrders } from '../components/admin/AdminCustomOrders'
 import { AdminCorporate } from '../components/admin/AdminCorporate'
+import { AdminOrders } from '../components/admin/AdminOrders'
 
-type AdminTab = 'produtos' | 'personalizados' | 'corporativo'
+type AdminTab = 'pedidos' | 'produtos' | 'personalizados' | 'corporativo'
 
 const TABS: { id: AdminTab; label: string; icon: typeof Package }[] = [
+    { id: 'pedidos', label: 'Pedidos', icon: ShoppingBag },
     { id: 'produtos', label: 'Produtos', icon: Package },
     { id: 'personalizados', label: 'Personalizados', icon: Sparkles },
     { id: 'corporativo', label: 'Corporativo', icon: Building2 },
@@ -18,7 +20,7 @@ export function Admin() {
     const [password, setPassword] = useState('')
     const [authenticated, setAuthenticated] = useState(false)
     const [error, setError] = useState(false)
-    const [activeTab, setActiveTab] = useState<AdminTab>('produtos')
+    const [activeTab, setActiveTab] = useState<AdminTab>('pedidos')
 
     function handleLogin(e: React.FormEvent) {
         e.preventDefault()
@@ -127,6 +129,7 @@ export function Admin() {
 
             {/* Content */}
             <div className="rounded-2xl p-5 md:p-6" style={{ backgroundColor: theme.bgCard, border: `1px solid ${theme.border}` }}>
+                {activeTab === 'pedidos' && <AdminOrders />}
                 {activeTab === 'produtos' && <AdminProducts />}
                 {activeTab === 'personalizados' && <AdminCustomOrders />}
                 {activeTab === 'corporativo' && <AdminCorporate />}
