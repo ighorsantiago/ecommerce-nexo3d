@@ -49,13 +49,13 @@ export function HeroBanner({ slides }: Props) {
                 <div
                     key={i}
                     className="absolute inset-0 transition-opacity duration-700"
-                    style={{ opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0 }}
+                    style={{ opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0, backgroundColor: '#0a0f1e' }}
                     aria-hidden={i !== current}
                 >
                     <img
                         src={slide.image}
                         alt={slide.title}
-                        className="w-full h-full object-cover object-center"
+                        className="w-full h-full object-contain object-center"
                         draggable={false}
                     />
                     {/* Gradiente esquerda para legibilidade do texto */}
