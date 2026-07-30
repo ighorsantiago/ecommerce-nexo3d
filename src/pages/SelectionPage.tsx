@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { User, Building2, Cpu, ArrowRight } from 'lucide-react'
+import { User, Building2, ArrowRight } from 'lucide-react'
 import { theme } from '../themes'
 import { useUserType, type UserType } from '../contexts/UserTypeContext'
 
@@ -18,7 +18,12 @@ const OPTIONS: {
         icon: User,
         title: 'Sou Particular',
         subtitle: 'Quero algo único para mim ou para oferecer',
-        items: ['Chaveiros e lembranças personalizadas', 'Troféus e prémios', 'Decoração e organização', 'Suportes e acessórios'],
+        items: [
+            'Chaveiros e lembranças personalizadas',
+            'Troféus e prémios',
+            'Decoração e organização',
+            'Suportes e acessórios',
+        ],
         cta: 'Entrar como Particular',
         dest: '/loja',
     },
@@ -27,7 +32,12 @@ const OPTIONS: {
         icon: Building2,
         title: 'Sou Empresa',
         subtitle: 'Preciso de soluções para o meu negócio',
-        items: ['Brindes corporativos em volume', 'Totens NFC para avaliações Google', 'Troféus e reconhecimento de equipa', 'Fatura disponível + proposta personalizada'],
+        items: [
+            'Brindes corporativos em volume',
+            'Totens NFC para avaliações Google',
+            'Troféus e reconhecimento de equipa',
+            'Fatura disponível + proposta personalizada',
+        ],
         cta: 'Entrar como Empresa',
         dest: '/empresa',
     },
@@ -38,9 +48,9 @@ export function SelectionPage() {
     const { userType, setUserType } = useUserType()
 
     useEffect(() => {
-        if (userType === 'particular') navigate('/loja', { replace: true })
+        if (userType === 'particular') navigate('/loja',   { replace: true })
         else if (userType === 'empresa') navigate('/empresa', { replace: true })
-    }, []) // run only on mount
+    }, []) // apenas no mount
 
     function handleSelect(type: UserType, dest: string) {
         setUserType(type)
@@ -52,20 +62,10 @@ export function SelectionPage() {
             className="min-h-[calc(100svh-64px)] flex flex-col items-center justify-center px-4 py-12"
             style={{ background: `linear-gradient(160deg, ${theme.bgSection} 0%, #fff 55%, ${theme.bgSection} 100%)` }}
         >
-            {/* Branding */}
-            <div className="flex flex-col items-center gap-3 mb-10">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: theme.primary }}>
-                    <Cpu size={28} color="#fff" />
-                </div>
-                <div className="text-center">
-                    <h1 className="text-3xl md:text-4xl font-extrabold" style={{ color: theme.textPrimary, fontFamily: 'Sora, sans-serif' }}>
-                        Bem-vindo à <span style={{ color: theme.primary }}>Nexo3D</span>
-                    </h1>
-                    <p className="mt-2 text-base" style={{ color: theme.textSecondary }}>
-                        Selecione o seu perfil para uma experiência personalizada
-                    </p>
-                </div>
-            </div>
+            {/* Tagline */}
+            <p className="mb-8 text-base" style={{ color: theme.textSecondary }}>
+                Selecione o seu perfil para uma experiência personalizada
+            </p>
 
             {/* Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full max-w-2xl">
@@ -81,16 +81,16 @@ export function SelectionPage() {
                         }}
                         onMouseEnter={e => {
                             e.currentTarget.style.borderColor = theme.primary
-                            e.currentTarget.style.boxShadow = theme.shadowHover
-                            e.currentTarget.style.transform = 'translateY(-3px)'
+                            e.currentTarget.style.boxShadow  = theme.shadowHover
+                            e.currentTarget.style.transform  = 'translateY(-3px)'
                         }}
                         onMouseLeave={e => {
                             e.currentTarget.style.borderColor = theme.border
-                            e.currentTarget.style.boxShadow = theme.shadow
-                            e.currentTarget.style.transform = 'translateY(0)'
+                            e.currentTarget.style.boxShadow  = theme.shadow
+                            e.currentTarget.style.transform  = 'translateY(0)'
                         }}
                     >
-                        {/* Icon */}
+                        {/* Ícone */}
                         <div
                             className="w-12 h-12 rounded-2xl flex items-center justify-center"
                             style={{ backgroundColor: theme.bgSection }}
@@ -98,17 +98,20 @@ export function SelectionPage() {
                             <Icon size={24} style={{ color: theme.primary }} />
                         </div>
 
-                        {/* Text */}
+                        {/* Texto */}
                         <div>
                             <p className="text-xl font-extrabold" style={{ color: theme.textPrimary }}>{title}</p>
                             <p className="mt-1 text-sm leading-relaxed" style={{ color: theme.textSecondary }}>{subtitle}</p>
                         </div>
 
-                        {/* Items */}
+                        {/* Lista */}
                         <ul className="flex flex-col gap-2">
                             {items.map(item => (
                                 <li key={item} className="flex items-start gap-2 text-sm" style={{ color: theme.textSecondary }}>
-                                    <span className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ backgroundColor: theme.primary }}>
+                                    <span
+                                        className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                                        style={{ backgroundColor: theme.primary }}
+                                    >
                                         ✓
                                     </span>
                                     {item}
