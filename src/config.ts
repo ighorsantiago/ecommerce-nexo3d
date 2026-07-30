@@ -1,6 +1,32 @@
 import type { Product } from './types'
+import type { BannerSlide } from './components/base/HeroBanner'
 
 // ── Única fonte de verdade — trocar cliente = trocar este ficheiro ──────────
+
+// Guardar as imagens em public/ com os nomes banner-1.jpg, banner-2.jpg, banner-3.jpg
+export const bannerSlides: BannerSlide[] = [
+    {
+        image: '/banner-1.jpg',
+        title: 'Figuras 3D Personalizadas',
+        subtitle: 'Do seu personagem favorito ao mascote da sua marca — imprimimos tudo com detalhe e cor.',
+        cta: 'Ver produtos',
+        ctaLink: '/catalogo',
+    },
+    {
+        image: '/banner-2.jpg',
+        title: 'Design com Funcionalidade',
+        subtitle: 'Peças únicas que combinam estética e utilidade para o seu dia a dia.',
+        cta: 'Ver catálogo',
+        ctaLink: '/catalogo',
+    },
+    {
+        image: '/banner-3.jpg',
+        title: 'Para Gamers e Colecionadores',
+        subtitle: 'Suportes e acessórios personalizados para elevar o seu setup ao próximo nível.',
+        cta: 'Encomendar',
+        ctaLink: '/catalogo?categoria=personalizados',
+    },
+]
 
 export const config = {
     brand: {

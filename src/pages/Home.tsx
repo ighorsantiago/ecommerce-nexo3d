@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { Zap, Package, Heart, Wifi } from 'lucide-react'
 import { theme } from '../themes'
-import { config } from '../config'
+import { config, bannerSlides } from '../config'
 import { useProducts } from '../contexts/ProductsContext'
 import { ProductCard } from '../components/catalog/ProductCard'
+import { HeroBanner } from '../components/base/HeroBanner'
 
 const features = [
     { icon: Package, title: 'Produção sob encomenda', desc: 'Cada peça é fabricada especialmente para si, com prazo de 3 a 7 dias úteis.' },
@@ -18,48 +19,8 @@ export function Home() {
 
     return (
         <div>
-            {/* Hero */}
-            <section
-                className="px-4 py-20 md:py-28 flex flex-col items-center text-center gap-6"
-                style={{ background: `linear-gradient(135deg, ${theme.bgSection} 0%, #fff 60%)` }}
-            >
-                <span
-                    className="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider"
-                    style={{ backgroundColor: theme.nfcBg, color: theme.primary }}
-                >
-                    Impressão 3D · Portugal 🇵🇹
-                </span>
-                <h1
-                    className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl"
-                    style={{ color: theme.textPrimary }}
-                >
-                    Transformamos a sua ideia em{' '}
-                    <span style={{ color: theme.primary }}>produto real</span>
-                </h1>
-                <p className="text-lg max-w-xl leading-relaxed" style={{ color: theme.textSecondary }}>
-                    Chaveiros, troféus, totens NFC e muito mais — impressos em 3D, personalizados e entregues em Portugal.
-                </p>
-                <div className="flex flex-wrap gap-3 justify-center">
-                    <Link
-                        to="/catalogo"
-                        className="px-8 py-4 rounded-xl font-bold text-white text-sm transition-all"
-                        style={{ backgroundColor: theme.primary }}
-                        onMouseEnter={e => (e.currentTarget.style.backgroundColor = theme.primaryHover)}
-                        onMouseLeave={e => (e.currentTarget.style.backgroundColor = theme.primary)}
-                    >
-                        Ver produtos
-                    </Link>
-                    <a
-                        href={`https://wa.me/${config.brand.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Olá! Quero saber mais sobre os vossos produtos.')}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="px-8 py-4 rounded-xl font-bold text-sm transition-all border"
-                        style={{ color: theme.primary, borderColor: theme.primary, backgroundColor: 'transparent' }}
-                    >
-                        Falar connosco
-                    </a>
-                </div>
-            </section>
+            {/* Banner carrossel */}
+            <HeroBanner slides={bannerSlides} />
 
             {/* Produtos em destaque */}
             <section className="max-w-6xl mx-auto px-4 py-16">
