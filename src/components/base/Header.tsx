@@ -254,7 +254,7 @@ export function Header() {
                                 style={{ backgroundColor: '#25D366' }}
                                 onClick={() => setMenuOpen(false)}
                             >
-                                Falar connosco no WhatsApp
+                                Falar conosco no WhatsApp
                             </a>
                         </div>
                     </aside>

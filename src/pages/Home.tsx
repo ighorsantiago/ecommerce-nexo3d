@@ -22,6 +22,45 @@ export function Home() {
             {/* Banner carrossel */}
             <HeroBanner slides={bannerSlides} />
 
+            {/* Tagline + CTAs */}
+            <section
+                className="px-4 py-10 flex flex-col items-center text-center gap-5"
+                style={{ borderBottom: `1px solid ${theme.border}` }}
+            >
+                <div>
+                    <p className="text-lg md:text-xl leading-relaxed" style={{ color: theme.textSecondary }}>
+                        Chaveiros, troféus, totens NFC e muito mais.
+                    </p>
+                    <p className="text-lg md:text-xl leading-relaxed" style={{ color: theme.textSecondary }}>
+                        Impressos em 3D, personalizados e entregues por toda a Europa
+                        <sup style={{ color: theme.primary, fontSize: '0.65em' }}>*</sup>.
+                    </p>
+                    <p className="mt-2 text-xs" style={{ color: theme.textMuted }}>
+                        * Consultar disponibilidade de envio para o seu endereço
+                    </p>
+                </div>
+                <div className="flex flex-wrap gap-3 justify-center">
+                    <Link
+                        to="/catalogo"
+                        className="px-8 py-3.5 rounded-xl font-bold text-white text-sm transition-all"
+                        style={{ backgroundColor: theme.primary }}
+                        onMouseEnter={e => (e.currentTarget.style.backgroundColor = theme.primaryHover)}
+                        onMouseLeave={e => (e.currentTarget.style.backgroundColor = theme.primary)}
+                    >
+                        Ver produtos
+                    </Link>
+                    <a
+                        href={`https://wa.me/${config.brand.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Olá! Quero saber mais sobre os vossos produtos.')}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-8 py-3.5 rounded-xl font-bold text-sm transition-all border"
+                        style={{ color: theme.primary, borderColor: theme.primary, backgroundColor: 'transparent' }}
+                    >
+                        Falar conosco
+                    </a>
+                </div>
+            </section>
+
             {/* Produtos em destaque */}
             <section className="max-w-6xl mx-auto px-4 py-16">
                 <div className="flex items-end justify-between mb-8">

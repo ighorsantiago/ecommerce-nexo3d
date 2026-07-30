@@ -19,7 +19,7 @@ export function Policy() {
                 },
                 {
                     title: '3. Como solicitar uma troca ou devolução',
-                    content: 'Entre em contacto connosco via WhatsApp ou e-mail, indicando:\n• Número e data da encomenda\n• Descrição do problema\n• Fotografias do produto recebido\n\nResponderemos em até 48 horas úteis.',
+                    content: 'Entre em contacto conosco via WhatsApp ou e-mail, indicando:\n• Número e data da encomenda\n• Descrição do problema\n• Fotografias do produto recebido\n\nResponderemos em até 48 horas úteis.',
                 },
                 {
                     title: '4. Custos de devolução',
