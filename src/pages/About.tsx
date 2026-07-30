@@ -29,7 +29,7 @@ export function About() {
                     Utilizamos impressão FDM (Fused Deposition Modeling), a tecnologia mais versátil e acessível da impressão 3D, que nos permite produzir desde simples chaveiros a peças técnicas e decorativas com alta qualidade. Cada produto é produzido sob encomenda, o que significa que nenhuma peça é desperdiçada e cada cliente recebe algo feito especialmente para si.
                 </p>
                 <p>
-                    Temos operação principal em Portugal, e no futuro próximo também em produção no Brasil — o que nos permitirá expandir os envios e reduzir prazos para clientes nos dois lados do Atlântico.
+                    Temos operação principal em Portugal, e no futuro próximo também em produção no Brasil, o que nos permitirá expandir os envios e reduzir prazos para clientes nos dois lados do Atlântico.
                 </p>
             </div>
 

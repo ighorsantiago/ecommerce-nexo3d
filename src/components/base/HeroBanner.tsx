@@ -43,7 +43,7 @@ export function HeroBanner({ slides }: Props) {
     if (!slides.length) return null
 
     return (
-        <div className="relative w-full overflow-hidden" style={{ height: 'clamp(260px, 50vw, 520px)' }}>
+        <div className="relative w-full overflow-hidden" style={{ height: 'clamp(320px, 56vw, 580px)' }}>
             {/* Slides */}
             {slides.map((slide, i) => (
                 <div
@@ -78,7 +78,7 @@ export function HeroBanner({ slides }: Props) {
                                     Destaque
                                 </p>
                                 <h2
-                                    className="text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 text-white"
+                                    className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight mb-3 text-white"
                                     style={{ fontFamily: 'Sora, sans-serif', textShadow: '0 2px 12px rgba(0,0,0,0.3)' }}
                                 >
                                     {slide.title}
