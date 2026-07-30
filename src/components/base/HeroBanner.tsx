@@ -43,7 +43,7 @@ export function HeroBanner({ slides }: Props) {
     if (!slides.length) return null
 
     return (
-        <div className="relative w-full overflow-hidden" style={{ height: 'clamp(320px, 56vw, 580px)' }}>
+        <div className="relative w-full overflow-hidden" style={{ height: 'clamp(260px, 42vw, 440px)' }}>
             {/* Slides */}
             {slides.map((slide, i) => (
                 <div
